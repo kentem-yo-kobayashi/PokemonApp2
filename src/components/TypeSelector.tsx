@@ -4,7 +4,7 @@ import type { NameAndUrl } from "../utils/types";
 
 const TYPE_END_POINT = "https://pokeapi.co/api/v2/type/"
 
-const TypeSelector = () => {
+const TypeSelector = ({setType}:{setType: (obj:NameAndUrl) => void}) => {
 
   const [types, setTypes] = useState<NameAndUrl[]>([])
 
@@ -17,8 +17,15 @@ const TypeSelector = () => {
     fetchRegions()
   }, []);
 
+    const toggleType = (v:string) => {
+    const newType = types.find(type => type.name === v)
+    if (newType === undefined) return 
+    console.log(newType)
+    setType(newType)
+  }
+
   return (
-    <select>
+    <select onChange={e => toggleType(e.target.value)}>
       <option hidden>選択してください</option>
       {types.map((type) => (
         <option key={type.name} value={type.name}>
