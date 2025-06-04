@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTypes } from "../api/pokeApi";
 import type { NameAndUrl } from "../utils/types";
+import "./TypeSelector.css"
 
 const TYPE_END_POINT = "https://pokeapi.co/api/v2/type/"
 
@@ -25,7 +26,7 @@ const TypeSelector = ({setType}:{setType: (obj:NameAndUrl) => void}) => {
   }
 
   return (
-    <select onChange={e => toggleType(e.target.value)}>
+    <select className="type-selector" onChange={e => toggleType(e.target.value)}>
       <option hidden>選択してください</option>
       {types.map((type) => (
         <option key={type.name} value={type.name}>

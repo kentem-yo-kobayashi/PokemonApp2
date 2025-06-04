@@ -11,13 +11,17 @@ function App() {
 
   return (
     <>
+    <header>
       <RegionSelector setRegion={setSelectedRegion} />
       <TypeSelector setType={setSelectedType} />
+    </header>
+    <main>
       {selectedRegion === undefined || selectedType === undefined ? (
         <>世代とタイプを選択してください</>
       ) : (
         <Pokemons region={selectedRegion} type={selectedType} />
       )}
+    </main>
     </>
   );
 }

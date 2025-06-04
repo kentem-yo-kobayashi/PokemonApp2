@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { NameAndUrl } from "../utils/types";
 import { getRegions } from "../api/pokeApi";
+import "./RegionSelector.css"
 
 const REGION_END_POINT = "https://pokeapi.co/api/v2/region/";
 
@@ -25,7 +26,7 @@ const RegionSelector = ({setRegion}:{setRegion: (obj:NameAndUrl) => void}) => {
   }
 
   return (
-    <select onChange={e => toggleRegion(e.target.value)}>
+    <select className="region-selector" onChange={e => toggleRegion(e.target.value)}>
       <option hidden>選択してください</option>
       {regions.map((region) => (
         <option key={region.name} value={region.name}>

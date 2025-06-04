@@ -1,0 +1,10 @@
+header {
+  height: 48px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+}
+
+main{
+  overflow-y: scroll;
+  height: calc(100vh - 48px);
+}

@@ -23,14 +23,14 @@ const Pokemons = ({
     };
 
     fetchPokemons();
-  }, []);
+  }, [region, type]);
 
   return (
     <>
       {isPending ? (
         <>Loading</>
       ) : (
-        pokemons.map((pokemon) => <>{pokemon.name}</>)
+        pokemons.map((pokemon) => <h4>{pokemon.name}</h4>)
       )}
     </>
   );
