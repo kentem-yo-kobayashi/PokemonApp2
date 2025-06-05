@@ -20,7 +20,6 @@ const TypeSelector = ({ setType }: { setType: (obj: NameAndUrl) => void }) => {
   const toggleType = (v: string) => {
     const newType = types.find((type) => type.name === v);
     if (newType === undefined) return;
-    console.log(newType);
     setType(newType);
   };
 

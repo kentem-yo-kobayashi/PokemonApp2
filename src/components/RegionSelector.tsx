@@ -24,7 +24,6 @@ const RegionSelector = ({
   const toggleRegion = (v: string) => {
     const newRegion = regions.find((region) => region.name === v);
     if (newRegion === undefined) return;
-    console.log(newRegion);
     setRegion(newRegion);
   };
 
