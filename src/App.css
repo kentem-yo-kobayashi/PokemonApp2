@@ -2,9 +2,23 @@ header {
   height: 80px;
   border-bottom: 1px solid #ddd;
   display: flex;
+  background: #fee;
+}
+
+header h1{
+  width: calc((50% - 400px) * 2);
+  text-align: center;
+}
+
+header .language-selector {
 }
 
 main{
   overflow-y: scroll;
   height: calc(100vh - 88px);
+  background: #eff;
+}
+
+main .pausing {
+  text-align: center;
 }

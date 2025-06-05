@@ -2,24 +2,27 @@ import { useEffect, useState } from "react";
 import type { NameAndUrl, Pokemon, Species } from "../utils/types";
 import { getPokemons } from "../api/pokeApi";
 import PokemonCard from "./PokemonCard";
+import "./Pokemons.css";
 
 const Pokemons = ({
   region,
   type,
+  language,
 }: {
   region: NameAndUrl;
   type: NameAndUrl;
+  language: NameAndUrl | undefined;
 }) => {
   const [isPending, setIsPending] = useState(false);
 
-  const [pokemons, setPokemon] = useState<(Pokemon & Species)[]>([]);
+  const [pokemons, setPokemons] = useState<(Pokemon & Species)[]>([]);
 
   useEffect(() => {
     const fetchPokemons = async () => {
       if (region === undefined || type === undefined) return;
       setIsPending(true);
       const res = await getPokemons(region.url, type.name);
-      setPokemon(res);
+      setPokemons(res);
       setIsPending(false);
     };
 
@@ -29,9 +32,17 @@ const Pokemons = ({
   return (
     <>
       {isPending ? (
-        <>Loading</>
+        <h2 className="pausing">Loading</h2>
       ) : (
-        pokemons.map((pokemon) => <PokemonCard pokemon={pokemon}/>)
+        <div className="encyclopedia">
+          {pokemons.map((pokemon) => (
+            <PokemonCard
+              key={pokemon.name}
+              pokemon={pokemon}
+              language={language}
+            />
+          ))}
+        </div>
       )}
     </>
   );
