@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { NameAndUrl } from "../utils/types";
 import { getLanguages } from "../api/pokeApi";
-import "./LanguageSelector.css"
+import "./LanguageSelector.css";
 
 const LANGUAGE_END_POINT = "https://pokeapi.co/api/v2/language/";
 
@@ -16,9 +16,8 @@ const LanguageSelector = ({
     const fetchLanguage = async () => {
       const { results } = await getLanguages(LANGUAGE_END_POINT);
       setLanguages(results);
-      setLanguage(results[0])
+      setLanguage(results[0]);
     };
-
     fetchLanguage();
   }, []);
 
@@ -29,16 +28,19 @@ const LanguageSelector = ({
   };
 
   return (
-    <select
-      className="language-selector"
-      onChange={(e) => toggleLanguage(e.target.value)}
-    >
-      {languages.map((language) => (
-        <option key={language.name} value={language.name}>
-          {language.name}
-        </option>
-      ))}
-    </select>
+    <>
+      <p>Language:</p>
+      <select
+        className="language-selector"
+        onChange={(e) => toggleLanguage(e.target.value)}
+      >
+        {languages.map((language) => (
+          <option key={language.name} value={language.name}>
+            {language.name}
+          </option>
+        ))}
+      </select>
+    </>
   );
 };
 
