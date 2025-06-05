@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { NameAndUrl, Pokemon, Species } from "../utils/types";
 import { getPokemons } from "../api/pokeApi";
 import PokemonCard from "./PokemonCard";
-import "./Pokemons.css"
+import "./Pokemons.css";
 
 const Pokemons = ({
   region,
@@ -30,15 +30,17 @@ const Pokemons = ({
   }, [region, type]);
 
   return (
-    <div className="encyclopedia">
+    <>
       {isPending ? (
-        <>Loading</>
+        <h2 className="pausing">Loading</h2>
       ) : (
-        pokemons.map((pokemon) => (
-          <PokemonCard pokemon={pokemon} language={language} />
-        ))
+        <div className="encyclopedia">
+          {pokemons.map((pokemon) => (
+            <PokemonCard key={pokemon.name} pokemon={pokemon} language={language} />
+          ))}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

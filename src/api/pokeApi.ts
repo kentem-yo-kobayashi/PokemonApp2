@@ -85,8 +85,6 @@ export const getPokemons = async (url: string, type: string) => {
     return { ...item, ..._pokemon[index] };
   });
 
-  console.log(totalPokemonData);
-
   const results = totalPokemonData.filter((pokemon) => {
     if (pokemon.types.map((type) => type.type.name).includes(type))
       return pokemon;

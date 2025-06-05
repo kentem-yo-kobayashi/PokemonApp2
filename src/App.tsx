@@ -22,7 +22,7 @@ function App() {
       <main>
         {selectedRegion === undefined ||
         selectedType === undefined  ? (
-          <>世代とタイプを選択してください</>
+          <h2 className="pausing">世代とタイプを選択してください</h2>
         ) : (
           <Pokemons
             region={selectedRegion}

@@ -6,12 +6,20 @@ header {
 }
 
 header h1{
-  margin-left: 16px;
-  flex: 50%;
+  width: calc((50% - 400px) * 2);
+  text-align: center;
+}
+
+header .language-selector {
+  margin-left: auto;
 }
 
 main{
   overflow-y: scroll;
   height: calc(100vh - 88px);
   background: #eff;
+}
+
+main .pausing {
+  text-align: center;
 }
