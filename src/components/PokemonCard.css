@@ -1,0 +1,9 @@
+.pokemon-card {
+  height: 300px;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+}
+.pokemon-card > img {
+  width: 65%;
+}

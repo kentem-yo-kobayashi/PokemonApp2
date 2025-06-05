@@ -2,9 +2,16 @@ header {
   height: 80px;
   border-bottom: 1px solid #ddd;
   display: flex;
+  background: #fee;
+}
+
+header h1{
+  margin-left: 16px;
+  flex: 50%;
 }
 
 main{
   overflow-y: scroll;
   height: calc(100vh - 88px);
+  background: #eff;
 }

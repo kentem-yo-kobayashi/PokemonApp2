@@ -1,4 +1,5 @@
 import type {
+  Language,
   Pokemon,
   Pokemons,
   Region,
@@ -81,10 +82,10 @@ export const getPokemons = async (url: string, type: string) => {
   );
 
   const totalPokemonData = pokemonDetail.map((item, index) => {
-    return {...item, ..._pokemon[index] }
-  })
+    return { ...item, ..._pokemon[index] };
+  });
 
-  console.log(totalPokemonData)
+  console.log(totalPokemonData);
 
   const results = totalPokemonData.filter((pokemon) => {
     if (pokemon.types.map((type) => type.type.name).includes(type))
@@ -92,4 +93,22 @@ export const getPokemons = async (url: string, type: string) => {
   });
 
   return results;
+};
+
+export const getLanguages = async (url: string) => {
+  const res = await new Promise<Language>((resolve) =>
+    fetch(url)
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+  );
+
+  if (res.count <= limit) return res;
+
+  const resp = await new Promise<Language>((resolve) =>
+    fetch(`${url}?offset=0&limit=${res.count}`)
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+  );
+
+  return resp;
 };
