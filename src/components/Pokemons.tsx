@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import type { NameAndUrl, Pokemon, Species } from "../utils/types";
 import { getPokemons } from "../api/pokeApi";
 import PokemonCard from "./PokemonCard";
+import "./Pokemons.css";
 
 const Pokemons = ({
   region,
   type,
+  language,
 }: {
   region: NameAndUrl;
   type: NameAndUrl;
+  language: NameAndUrl | undefined;
 }) => {
   const [isPending, setIsPending] = useState(false);
 
@@ -29,9 +32,17 @@ const Pokemons = ({
   return (
     <>
       {isPending ? (
-        <>Loading</>
+        <h2 className="pausing">Loading</h2>
       ) : (
-        pokemons.map((pokemon) => <PokemonCard pokemon={pokemon}/>)
+        <div className="encyclopedia">
+          {pokemons.map((pokemon) => (
+            <PokemonCard
+              key={pokemon.name}
+              pokemon={pokemon}
+              language={language}
+            />
+          ))}
+        </div>
       )}
     </>
   );
