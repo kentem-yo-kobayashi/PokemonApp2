@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { NameAndUrl, Pokemon } from "../utils/types";
+import type { NameAndUrl, Pokemon, Species } from "../utils/types";
 import { getPokemons } from "../api/pokeApi";
 import PokemonCard from "./PokemonCard";
 
@@ -12,7 +12,7 @@ const Pokemons = ({
 }) => {
   const [isPending, setIsPending] = useState(false);
 
-  const [pokemons, setPokemon] = useState<Pokemon[]>([]);
+  const [pokemons, setPokemon] = useState<(Pokemon & Species)[]>([]);
 
   useEffect(() => {
     const fetchPokemons = async () => {
