@@ -1,14 +1,29 @@
-import './App.css'
-import RegionSelector from './components/RegionSelector'
-import TypeSelector from './components/TypeSelector'
+import { useState } from "react";
+import "./App.css";
+import RegionSelector from "./components/RegionSelector";
+import TypeSelector from "./components/TypeSelector";
+import type { NameAndUrl } from "./utils/types";
+import Pokemons from "./components/Pokemons";
 
 function App() {
+  const [selectedRegion, setSelectedRegion] = useState<NameAndUrl>();
+  const [selectedType, setSelectedType] = useState<NameAndUrl>();
+
   return (
     <>
-      <RegionSelector />
-      <TypeSelector />
+    <header>
+      <RegionSelector setRegion={setSelectedRegion} />
+      <TypeSelector setType={setSelectedType} />
+    </header>
+    <main>
+      {selectedRegion === undefined || selectedType === undefined ? (
+        <>世代とタイプを選択してください</>
+      ) : (
+        <Pokemons region={selectedRegion} type={selectedType} />
+      )}
+    </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
