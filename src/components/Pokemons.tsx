@@ -36,7 +36,11 @@ const Pokemons = ({
       ) : (
         <div className="encyclopedia">
           {pokemons.map((pokemon) => (
-            <PokemonCard key={pokemon.name} pokemon={pokemon} language={language} />
+            <PokemonCard
+              key={pokemon.name}
+              pokemon={pokemon}
+              language={language}
+            />
           ))}
         </div>
       )}

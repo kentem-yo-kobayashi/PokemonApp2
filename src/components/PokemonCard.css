@@ -4,6 +4,7 @@
   background: white;
   border-radius: 10px;
 }
-.pokemon-card > img {
+
+.pokemon-card>img {
   width: 65%;
 }

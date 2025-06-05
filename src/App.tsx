@@ -20,8 +20,7 @@ function App() {
         <LanguageSelector setLanguage={setSelectedLanguage} />
       </header>
       <main>
-        {selectedRegion === undefined ||
-        selectedType === undefined  ? (
+        {selectedRegion === undefined || selectedType === undefined ? (
           <h2 className="pausing">世代とタイプを選択してください</h2>
         ) : (
           <Pokemons

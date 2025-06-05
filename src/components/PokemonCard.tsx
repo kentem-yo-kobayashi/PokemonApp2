@@ -1,5 +1,5 @@
 import type { NameAndUrl, Pokemon, Species } from "../utils/types";
-import "./PokemonCard.css"
+import "./PokemonCard.css";
 
 const PokemonCard = ({
   pokemon,
@@ -9,17 +9,21 @@ const PokemonCard = ({
   language: NameAndUrl | undefined;
 }) => {
   const getNameOfLanguage = () => {
-    if (!language) return {name:"No data"}
-    const name = pokemon.names.find((_name) => _name.language.name === language.name);
-    if (name === undefined) return {name:"No data"}
-    return name
+    if (!language) return { name: "No data" };
+    const name = pokemon.names.find(
+      (_name) => _name.language.name === language.name
+    );
+    if (name === undefined) return { name: "No data" };
+    return name;
   };
   const getGenusOfLanguage = () => {
-    if (!language) return {genus:"No data"}
-    const genus = pokemon.genera.find((_genus) => _genus.language.name === language.name);
-    if (genus === undefined) return {genus:"No data"}
-    return genus
-  }
+    if (!language) return { genus: "No data" };
+    const genus = pokemon.genera.find(
+      (_genus) => _genus.language.name === language.name
+    );
+    if (genus === undefined) return { genus: "No data" };
+    return genus;
+  };
 
   return (
     <div key={pokemon.name} className="pokemon-card">
