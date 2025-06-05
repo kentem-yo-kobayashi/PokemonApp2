@@ -1,9 +1,16 @@
-import type { Pokemons, Region, RegionFile, Types } from "../utils/types";
+import type {
+  Pokemon,
+  Pokemons,
+  Region,
+  RegionFile,
+  Species,
+  Types,
+} from "../utils/types";
 
 const limit = 20;
 
 export const getRegions = async (url: string) => {
-  const res: Region = await new Promise((resolve) => {
+  const res = await new Promise<Region>((resolve) => {
     fetch(url)
       .then((res) => res.json())
       .then((res) => resolve(res));
@@ -11,7 +18,7 @@ export const getRegions = async (url: string) => {
 
   if (res.count <= limit) return res;
 
-  const resp: Region = await new Promise((resolve) => {
+  const resp = await new Promise<Region>((resolve) => {
     fetch(`${url}?offset=0&limit=${res.count}`)
       .then((res) => res.json())
       .then((res) => resolve(res));
@@ -21,7 +28,7 @@ export const getRegions = async (url: string) => {
 };
 
 export const getTypes = async (url: string) => {
-  const res: Types = await new Promise((resolve) => {
+  const res = await new Promise<Types>((resolve) => {
     fetch(url)
       .then((res) => res.json())
       .then((res) => resolve(res));
@@ -39,19 +46,19 @@ export const getTypes = async (url: string) => {
 };
 
 export const getPokemons = async (url: string, type: string) => {
-  const { main_generation }: RegionFile = await new Promise((resolve) =>
+  const { main_generation } = await new Promise<RegionFile>((resolve) =>
     fetch(url)
       .then((res) => res.json())
       .then((res) => resolve(res))
   );
 
-  const { pokemon_species }: Pokemons = await new Promise((resolve) =>
+  const { pokemon_species } = await new Promise<Pokemons>((resolve) =>
     fetch(main_generation.url)
       .then((res) => res.json())
       .then((res) => resolve(res))
   );
 
-  const _pokemon: { id: number }[] = await Promise.all(
+  const _pokemon = await Promise.all<Species>(
     pokemon_species.map(
       (species) =>
         new Promise((resolve) =>
@@ -62,13 +69,13 @@ export const getPokemons = async (url: string, type: string) => {
     )
   );
 
-  const pokemonDetail = await Promise.all(
+  const pokemonDetail = await Promise.all<Pokemon>(
     _pokemon.map(
-      (pokemon) =>
+      (item) =>
         new Promise((resolve) =>
-          fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}/`).then(
-            (res) => res.json().then((res) => resolve(res))
-          )
+          fetch(item.varieties[0].pokemon.url)
+            .then((res) => res.json())
+            .then((res) => resolve(res))
         )
     )
   );
@@ -78,5 +85,5 @@ export const getPokemons = async (url: string, type: string) => {
       return pokemon;
   });
 
-  return results
+  return results;
 };

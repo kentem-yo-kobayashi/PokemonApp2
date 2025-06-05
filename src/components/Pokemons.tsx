@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import type { NameAndUrl } from "../utils/types";
+import type { NameAndUrl, Pokemon } from "../utils/types";
 import { getPokemons } from "../api/pokeApi";
+import PokemonCard from "./PokemonCard";
 
 const Pokemons = ({
   region,
@@ -11,7 +12,7 @@ const Pokemons = ({
 }) => {
   const [isPending, setIsPending] = useState(false);
 
-  const [pokemons, setPokemon] = useState([]);
+  const [pokemons, setPokemon] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -30,7 +31,7 @@ const Pokemons = ({
       {isPending ? (
         <>Loading</>
       ) : (
-        pokemons.map((pokemon) => <h4>{pokemon.name}</h4>)
+        pokemons.map((pokemon) => <PokemonCard pokemon={pokemon}/>)
       )}
     </>
   );

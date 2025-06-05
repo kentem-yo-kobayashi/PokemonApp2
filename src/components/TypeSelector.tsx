@@ -27,7 +27,7 @@ const TypeSelector = ({setType}:{setType: (obj:NameAndUrl) => void}) => {
 
   return (
     <select className="type-selector" onChange={e => toggleType(e.target.value)}>
-      <option hidden>選択してください</option>
+      <option hidden>タイプを選択してください</option>
       {types.map((type) => (
         <option key={type.name} value={type.name}>
           {type.name}

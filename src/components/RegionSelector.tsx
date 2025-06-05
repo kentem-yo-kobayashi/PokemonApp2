@@ -27,7 +27,7 @@ const RegionSelector = ({setRegion}:{setRegion: (obj:NameAndUrl) => void}) => {
 
   return (
     <select className="region-selector" onChange={e => toggleRegion(e.target.value)}>
-      <option hidden>選択してください</option>
+      <option hidden>地方を選択してください</option>
       {regions.map((region) => (
         <option key={region.name} value={region.name}>
           {region.name}
