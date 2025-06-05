@@ -15,14 +15,14 @@ const Pokemons = ({
 }) => {
   const [isPending, setIsPending] = useState(false);
 
-  const [pokemons, setPokemon] = useState<(Pokemon & Species)[]>([]);
+  const [pokemons, setPokemons] = useState<(Pokemon & Species)[]>([]);
 
   useEffect(() => {
     const fetchPokemons = async () => {
       if (region === undefined || type === undefined) return;
       setIsPending(true);
       const res = await getPokemons(region.url, type.name);
-      setPokemon(res);
+      setPokemons(res);
       setIsPending(false);
     };
 

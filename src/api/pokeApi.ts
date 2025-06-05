@@ -11,16 +11,15 @@ import type {
 // PokeAPI max count of fetching data
 const maxCount = 20;
 
-// get pokemon region data
-export const getRegions = async (url: string) => {
-  const res = await new Promise<Region>((resolve) => {
+const getData = async <T>(url: string) => {
+  const res = await new Promise<T & { count: number }>((resolve) => {
     fetch(url)
       .then((res) => res.json())
       .then((res) => resolve(res));
   });
   if (res.count <= maxCount) return res;
 
-  const resp = await new Promise<Region>((resolve) => {
+  const resp = await new Promise<T>((resolve) => {
     fetch(`${url}?offset=0&limit=${res.count}`)
       .then((res) => res.json())
       .then((res) => resolve(res));
@@ -28,42 +27,15 @@ export const getRegions = async (url: string) => {
 
   return resp;
 };
+
+// get pokemon region data
+export const getRegions = async (url: string) => await getData<Region>(url);
 
 // get pokemon types data
-export const getTypes = async (url: string) => {
-  const res = await new Promise<Types>((resolve) => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => resolve(res));
-  });
-
-  if (res.count <= maxCount) return res;
-
-  const resp: Types = await new Promise((resolve) => {
-    fetch(`${url}?offset=0&limit=${res.count}`)
-      .then((res) => res.json())
-      .then((res) => resolve(res));
-  });
-  return resp;
-};
+export const getTypes = async (url: string) => await getData<Types>(url);
 
 // get language data
-export const getLanguages = async (url: string) => {
-  const res = await new Promise<Language>((resolve) =>
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => resolve(res))
-  );
-
-  if (res.count <= maxCount) return res;
-
-  const resp = await new Promise<Language>((resolve) =>
-    fetch(`${url}?offset=0&limit=${res.count}`)
-      .then((res) => res.json())
-      .then((res) => resolve(res))
-  );
-  return resp;
-};
+export const getLanguages = async (url: string) => await getData<Language>(url);
 
 // get pokemon data
 export const getPokemons = async (url: string, type: string) => {
@@ -107,7 +79,9 @@ export const getPokemons = async (url: string, type: string) => {
 
   // marge data1 and data2
   const totalPokemonData = pokemonDetail.map((item, index) => {
-    return { ...item, ..._pokemon[index] };
+    const { types, name, sprites } = { ...item };
+    const { names, genera, varieties } = { ..._pokemon[index] };
+    return { name, names, genera, types, sprites, varieties };
   });
 
   const results = totalPokemonData.filter((pokemon) =>
