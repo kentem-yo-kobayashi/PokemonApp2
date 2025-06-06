@@ -28,8 +28,8 @@ const LanguageSelector = ({
   };
 
   return (
-    <>
-      <p>Language:</p>
+    <label>
+      Language:
       <select
         className="language-selector"
         onChange={(e) => toggleLanguage(e.target.value)}
@@ -40,7 +40,7 @@ const LanguageSelector = ({
           </option>
         ))}
       </select>
-    </>
+    </label>
   );
 };
 

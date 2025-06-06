@@ -9,27 +9,32 @@ const PokemonCard = ({
   language: NameAndUrl | undefined;
 }) => {
   const getNameOfLanguage = () => {
-    if (!language) return { name: "No data" };
+    if (!language) return "No data";
     const name = pokemon.names.find(
       (_name) => _name.language.name === language.name
     );
-    if (name === undefined) return { name: "No data" };
-    return name;
+    if (name === undefined) return "No data" ;
+    return name.name;
   };
+
   const getGenusOfLanguage = () => {
-    if (!language) return { genus: "No data" };
+    if (!language) return "No data";
     const genus = pokemon.genera.find(
       (_genus) => _genus.language.name === language.name
     );
-    if (genus === undefined) return { genus: "No data" };
-    return genus;
+    if (genus === undefined) return "No data";
+    return genus.genus;
   };
 
   return (
     <div key={pokemon.name} className="pokemon-card">
-      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-      <h3>{getNameOfLanguage().name}</h3>
-      <p>{getGenusOfLanguage().genus}</p>
+      <img
+        src={pokemon.sprites.front_default}
+        alt={pokemon.name}
+        loading="lazy"
+      />
+      <h3>{getNameOfLanguage()}</h3>
+      <p>{getGenusOfLanguage()}</p>
     </div>
   );
 };
