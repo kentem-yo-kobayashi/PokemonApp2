@@ -1,5 +1,4 @@
 .encyclopedia {
-  margin: 8px 80px;
   display: grid;
   grid-template-columns: repeat(3, 300px);
   justify-content: space-between;

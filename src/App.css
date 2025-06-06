@@ -1,24 +1,42 @@
+:root {
+  --header-height: 80px;
+  --header-padding: 15px;
+  --selector-width: 240px
+}
+
 header {
-  height: 80px;
-  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+  height: var(--header-height);
   display: flex;
+  align-items: center;
   background: #fee;
+  padding: var(--header-padding);
+  gap: 16px;
+  justify-content: space-between;
 }
 
-header h1{
-  width: calc((50% - 400px) * 2);
-  text-align: center;
+header .region-selector,
+.type-selector {
+  width: var(--selector-width);
 }
 
-header .language-selector {
+header label {
+  width: calc(var(--selector-width) * 2);
+  text-align: right;
 }
 
-main{
+main {
   overflow-y: scroll;
-  height: calc(100vh - 88px);
+  height: calc(100vh - calc(var(--header-height) + 20px));
   background: #eff;
+  padding: 8px 72px;
 }
 
 main .pausing {
   text-align: center;
+}
+
+.selectors {
+  display: flex;
+  gap: 16px;
 }

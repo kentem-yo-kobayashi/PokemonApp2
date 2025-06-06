@@ -14,8 +14,10 @@ function App() {
   return (
     <>
       <header>
-        <RegionSelector setRegion={setSelectedRegion} />
-        <TypeSelector setType={setSelectedType} />
+        <div className="selectors">
+          <RegionSelector setRegion={setSelectedRegion} />
+          <TypeSelector setType={setSelectedType} />
+        </div>
         <h1>ポケモン図鑑</h1>
         <LanguageSelector setLanguage={setSelectedLanguage} />
       </header>
