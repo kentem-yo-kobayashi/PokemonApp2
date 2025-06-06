@@ -51,18 +51,18 @@ export const getPokemons = async (url: string, selectedType: string) => {
   const _pokemon = await Promise.all<Species>(
     pokemon_species.map((species) => fetchData<Species>(species.url))
   );
-  // get pokemon data2
-  const pokemonDetail = await Promise.all<Pokemon>(
-    _pokemon.map((item) => fetchData(item.varieties[0].pokemon.url))
-  );
-  // marge data1 and data2
-  const totalPokemonData = pokemonDetail.map((item, index) => {
-    const { types, name, sprites } = item;
-    const { names, genera, varieties } = _pokemon[index];
-    return { name, names, genera, types, sprites, varieties };
-  });
-  const results = totalPokemonData.filter((pokemon) =>
-    pokemon.types.some((type) => type.type.name === selectedType)
-  );
-  return results;
-};
+//   // get pokemon data2
+//   const pokemonDetail = await Promise.all<Pokemon>(
+//     _pokemon.map((item) => fetchData(item.varieties[0].pokemon.url))
+//   );
+//   // marge data1 and data2
+//   const totalPokemonData = pokemonDetail.map((item, index) => {
+//     const { types, name, sprites } = item;
+//     const { names, genera, varieties } = _pokemon[index];
+//     return { name, names, genera, types, sprites, varieties };
+//   });
+//   const results = totalPokemonData.filter((pokemon) =>
+//     pokemon.types.some((type) => type.type.name === selectedType)
+//   );
+//   return results;
+// };
